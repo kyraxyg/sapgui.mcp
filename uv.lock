@@ -1,5 +1,5 @@
 version = 1
-revision = 5
+revision = 3
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.15'",
@@ -2301,22 +2301,17 @@ wheels = [
 
 [[package]]
 name = "sap-mcp-config"
-version = "1.1.0"
-source = { registry = "https://pypi.org/simple" }
+version = "1.1.1.post1"
+source = { git = "https://github.com/kyraxyg/sap-mcp-config?rev=ce7cd48ea504f48786caf0a4bc32808ca4f1a71a#ce7cd48ea504f48786caf0a4bc32808ca4f1a71a" }
 dependencies = [
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/64/10/ad189f41c7d2b5f7c3900417324fe510465aec8ce59e2a53401833d63c98/sap_mcp_config-1.1.0.tar.gz", hash = "sha256:65f35b0a9700f10e37ceb75aa8065fb4b9c582b9a0d5af1ea6d5cd2da754b3c0", size = 107702, upload-time = "2026-08-10T14:55:12.354Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d1/35/1a0603a57b47e4f93001b13d5accb598409d5514d87e5c6b236424f77feb/sap_mcp_config-1.1.0-py3-none-any.whl", hash = "sha256:8be51e4642ba7760d9212dc90a06a5cef534f0e3c5ad25c4e414a35dc0434dd7", size = 15190, upload-time = "2026-08-10T14:55:11.026Z" },
-]
 
 [[package]]
 name = "sapguimcp"
 source = { editable = "." }
-default-groups = []
 dependencies = [
     { name = "fastmcp", extra = ["apps"] },
     { name = "httpx" },
@@ -2393,7 +2388,7 @@ requires-dist = [
     { name = "pydantic-settings", specifier = ">=2.0.0" },
     { name = "pywin32", marker = "sys_platform == 'win32'", specifier = ">=306" },
     { name = "rapidfuzz", specifier = ">=3.0.0" },
-    { name = "sap-mcp-config", specifier = ">=1.1.0" },
+    { name = "sap-mcp-config", git = "https://github.com/kyraxyg/sap-mcp-config?rev=ce7cd48ea504f48786caf0a4bc32808ca4f1a71a" },
     { name = "sapsucker", specifier = ">=1.5.0" },
 ]
 

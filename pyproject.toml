@@ -75,6 +75,10 @@ dev = [
 [tool.uv]
 default-groups = []
 
+# Fork of sap-mcp-config that also accepts language "TR" (upstream allows only DE/EN).
+[tool.uv.sources]
+sap-mcp-config = { git = "https://github.com/kyraxyg/sap-mcp-config", rev = "ce7cd48ea504f48786caf0a4bc32808ca4f1a71a" }
+
 [project.scripts]
 run-sapgui-mcp-server = "sapguimcp.server:main"
 
