@@ -1,5 +1,7 @@
 name: Build Executable
 
+# Builds the Windows/macOS executables. Also runs on the Turkish-language branch.
+
 on:
   push:
     branches: [main, claude/kind-newton-m5rsex]
