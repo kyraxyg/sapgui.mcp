@@ -12,8 +12,8 @@
     // Also try to update the visible dropdown display if it exists
     const dropdown = document.querySelector('#sap-language-dropdown');
     if (dropdown) {
-        const langDisplay =
-            language === 'EN' ? 'English' : language === 'DE' ? 'Deutsch' : language;
+        const langNames = { EN: 'English', DE: 'Deutsch', TR: 'Türkçe' };
+        const langDisplay = langNames[language] || language;
         dropdown.value = langDisplay;
     }
 };

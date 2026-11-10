@@ -14,6 +14,9 @@ class TestFormatSapDate:
     def test_en_format(self) -> None:
         assert format_sap_date("2026-02-22", "EN") == "02/22/2026"
 
+    def test_turkish_format(self):
+        assert format_sap_date("2026-02-22", "TR") == "22.02.2026"
+
     def test_de_single_digit_day(self) -> None:
         assert format_sap_date("2026-01-05", "DE") == "05.01.2026"
 

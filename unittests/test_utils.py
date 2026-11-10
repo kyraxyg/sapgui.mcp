@@ -21,6 +21,10 @@ class TestAsSapLanguage:
     def test_english_variants(self, value: str) -> None:
         assert as_sap_language(value) == "EN"
 
+    @pytest.mark.parametrize("value", ["TR", "tr", " tr "])
+    def test_turkish_variants(self, value: str) -> None:
+        assert as_sap_language(value) == "TR"
+
     @pytest.mark.parametrize("value", ["", "FR", "anything else"])
     def test_unrecognised_falls_back_to_en(self, value: str) -> None:
         """EN is the same default the config layer applies for a missing language."""
@@ -34,7 +38,7 @@ class TestAsSapLanguage:
         # The value travels as structured context, not in the message text.
         assert getattr(caplog.records[0], "language", None) == "FR"
 
-    @pytest.mark.parametrize("value", ["de", "DE", "en", "EN"])
+    @pytest.mark.parametrize("value", ["de", "DE", "en", "EN", "tr", "TR"])
     def test_recognised_is_not_logged(self, value: str, caplog: pytest.LogCaptureFixture) -> None:
         with caplog.at_level(logging.WARNING, logger="sapguimcp.utils"):
             as_sap_language(value)

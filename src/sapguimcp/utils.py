@@ -12,13 +12,13 @@ from typing import Any, Literal
 
 logger = logging.getLogger(__name__)
 
-SapLanguage = Literal["DE", "EN"]
+SapLanguage = Literal["DE", "EN", "TR"]
 
 
 def as_sap_language(value: str) -> SapLanguage:
-    """Narrow a configured language string to the two values date formatting handles.
+    """Narrow a configured language string to the values date formatting handles.
 
-    ``sap-mcp-config`` still guarantees a system's language is ``DE`` or ``EN``,
+    ``sap-mcp-config`` guarantees a system's language is one of its allowed codes,
     but since 1.1.0 it *types* the field as ``str``: the check moved off the
     field onto the ``Config`` model validator, so that one invalid language no
     longer aborts validation and hides every other error.  That leaves the
@@ -33,6 +33,8 @@ def as_sap_language(value: str) -> SapLanguage:
     normalized = value.strip().upper()
     if normalized == "DE":
         return "DE"
+    if normalized == "TR":
+        return "TR"
     if normalized != "EN":
         logger.warning(
             "unexpected configured language, falling back to EN",
@@ -47,11 +49,11 @@ def format_sap_date(iso_date: str, language: SapLanguage) -> str:
 
     Args:
         iso_date: Date string in YYYY-MM-DD format (e.g., "2026-02-22")
-        language: SAP language code ("DE" or "EN")
+        language: SAP language code ("DE", "EN" or "TR")
 
     Returns:
         Formatted date string:
-        - DE: DD.MM.YYYY (e.g., "22.02.2026")
+        - DE, TR: DD.MM.YYYY (e.g., "22.02.2026")
         - EN: MM/DD/YYYY (e.g., "02/22/2026")
 
     Raises:
@@ -62,7 +64,7 @@ def format_sap_date(iso_date: str, language: SapLanguage) -> str:
     except ValueError as e:
         raise ValueError(f"Expected YYYY-MM-DD format, got: {iso_date}") from e
 
-    if language == "DE":
+    if language in ("DE", "TR"):
         return dt.strftime("%d.%m.%Y")
     return dt.strftime("%m/%d/%Y")
 
