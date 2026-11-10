@@ -2,7 +2,8 @@ name: Build Executable
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/kind-newton-m5rsex]
+  workflow_dispatch:
   pull_request:
     branches: [main]
   release:
@@ -61,7 +62,8 @@ jobs:
     name: "Build (with_remote_logging)"
     # Repository secrets are not available to PRs from forks, so skip this
     # variant in that case. Public forks can still build the public binary.
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    # Also skipped on the Turkish-language branch build, which has no secrets configured.
+    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && github.ref != 'refs/heads/claude/kind-newton-m5rsex'
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
